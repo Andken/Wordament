@@ -92,30 +92,31 @@ def inBoxFirst(w, b):
     return False
 
 
-#y1 = raw_input("1?: ")
-#y2 = raw_input("2?: ")
-#y3 = raw_input("3?: ")
-#y4 = raw_input("4?: ")
-#
-#b = (list(y1), list(y2), list(y3), list(y4))
+y1 = raw_input("1?: ")
+y2 = raw_input("2?: ")
+y3 = raw_input("3?: ")
+y4 = raw_input("4?: ")
+
+b = (list(y1), list(y2), list(y3), list(y4))
 
 # TEST BOX
 #baby
 #over
 #open
 #knee
-b = (list("baby"), list("over"), list("open"), list("knee"))
+#b = (list("snwi"), list("esoa"), list("eupy"), list("eeis"))
 
 
-#wordlist = open("WORD_3_LETTER.LST", "r").readlines()
-#
-#for w in wordlist:
+wordlist = open("WORD_3_LETTER.LST", "r").readlines()
+
+for w in wordlist:
+#    print "trying", w
+    if inBoxFirst(list(w.rstrip()), b):
+        print w.rstrip()
+
+#for w in ("ape", "", "knee", "ape", "ben", "nope", "zebra", "platypus"):
 #    if inBoxFirst(list(w), b):
 #        print w
-
-for w in ("baby", "book", "knee", "ape", "ben", "nope", "zebra", "platypus"):
-    if inBoxFirst(list(w), b):
-        print w
 
 
 
