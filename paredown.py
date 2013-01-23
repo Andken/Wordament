@@ -4,7 +4,7 @@ wordlist = open("WORD.LST", "r").readlines()
 shorter = open("WORD_3_LETTER.LST", "w")
 
 for w in wordlist:
-    if len(w) > 3:  # need to include newline char
+    if (len(w.rstrip()) >= 3) and (len(w.rstrip()) <= 16):
         shorter.write(w)
 
 
