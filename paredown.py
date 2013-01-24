@@ -2,6 +2,9 @@
 
 wordlist = open("WORD.LST", "r").readlines()
 
+def sortstr(s):
+    return ''.join(sorted(s))
+
 def getScore(w):
     letter_score = {'a': 2, 
                     'b': 5,
@@ -46,11 +49,11 @@ result = []
 
 for w in wordlist:
     if (len(w.rstrip()) >= 3) and (len(w.rstrip()) <= 16):
-        result.append((w.rstrip(), getScore(w.rstrip())))
+        result.append((w.rstrip(), sortstr(w.rstrip()), getScore(w.rstrip())))
 
-scorelist=sorted(result, key=lambda score: score[1])
+scorelist=sorted(result, key=lambda score: score[2])
 scorelist.reverse()
 
 for pair in scorelist:
-    print pair[0], pair[1]
+    print pair[0], pair[1], pair[2]
 
