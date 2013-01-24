@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 wordlist = open("WORD.LST", "r").readlines()
-shorter = open("WORD_3_LETTER.LST", "w")
 
 def getScore(w):
     letter_score = {'a': 2, 
@@ -30,16 +29,25 @@ def getScore(w):
                     'x': 8,
                     'y': 5,
                     'z': 8}
-    return 6
+    score = 0
+    for letter in list(w):
+        score += letter_score[letter]
+
+    if len(w) == 4 or len(w) == 5:
+        score *= 1.5
+    elif len(w) == 6 or len(w) == 7:
+        score *= 2
+    elif len(w) >= 8:
+        score *= 3
+
+    return int(score)
+
+result = []
 
 for w in wordlist:
     if (len(w.rstrip()) >= 3) and (len(w.rstrip()) <= 16):
-        score = getScore(w.rstrip())
-        shorter.write(w.rstrip())
-        shorter.write(',')
-        shorter.write(str(score))
-        shorter.write('\n')
+        result.append((w.rstrip(), getScore(w.rstrip())))
 
-
-
+for pair in sorted(result, key=lambda score: score[1]):
+    print pair
 
