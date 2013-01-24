@@ -81,12 +81,21 @@ def inBox(xin, yin, w, b):
                             return True
     return False
 
-def isPossible(letters, b_sorted):
-    return True
+def isPossible(letters, letters_available):
+    if len(letters) > len(letters_available):
+        return False
+    
+    if len(letters) == 0:
+        return True
+
+    if letters[0] == letters_available[0]:
+        return isPossible(letters[1:], letters_available[1:])
+    else:
+        return isPossible(letters, letters_available[1:])
 
 def inBoxFirst(w, letters, b, b_sorted):
-    if not isPossible(letters, b_sorted):
-        return False
+#    if not isPossible(letters, b_sorted):
+#        return False
 
     for x in range(4):
         for y in range(4):
