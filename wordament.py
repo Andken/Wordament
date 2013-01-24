@@ -109,10 +109,10 @@ b = (list(y1), list(y2), list(y3), list(y4))
 
 wordlist = open("WORD_3_LETTER.LST", "r").readlines()
 
-for w in wordlist:
-#    print "trying", w
-    if inBoxFirst(list(w.rstrip()), b):
-        print w.rstrip()
+for pair in wordlist:
+    tuple = pair.rstrip().partition(' ')
+    if inBoxFirst(list(tuple[0]), b):
+        print tuple[0], tuple[2]
 
 #for w in ("ape", "", "knee", "ape", "ben", "nope", "zebra", "platypus"):
 #    if inBoxFirst(list(w), b):
