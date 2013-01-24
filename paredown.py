@@ -49,5 +49,5 @@ for w in wordlist:
         result.append((w.rstrip(), getScore(w.rstrip())))
 
 for pair in sorted(result, key=lambda score: score[1]):
-    print pair
+    print pair[0], pair[1]
 
