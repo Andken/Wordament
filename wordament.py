@@ -81,7 +81,7 @@ def inBox(xin, yin, w, b):
                             return True
     return False
 
-def inBoxFirst(w, letters, b):
+def inBoxFirst(w, letters, b, b_sorted):
     for x in range(4):
         for y in range(4):
             if b[x][y] == w[0]:
@@ -92,34 +92,24 @@ def inBoxFirst(w, letters, b):
     return False
 
 
-y1 = raw_input("1?: ")
-y2 = raw_input("2?: ")
-y3 = raw_input("3?: ")
-y4 = raw_input("4?: ")
-
-b = (list(y1), list(y2), list(y3), list(y4))
+y = raw_input("?: ")
 
 # TEST BOX
 #baby
 #over
 #open
 #knee
-#b = (list("snwi"), list("esoa"), list("eupy"), list("eeis"))
+#y = "babyoveropenknee"
 
+b = (list(y)[0:4], list(y)[4:8], list(y)[8:12], list(y)[12:16])
+y_sorted = ''.join(sorted(y))
 
 wordlist = open("WORD_3_LETTER.LST", "r").readlines()
 
 for pair in wordlist:
     tuple = pair.rstrip().split(' ')
-    if inBoxFirst(list(tuple[0]), list(tuple[1]), b):
+    if inBoxFirst(list(tuple[0]), list(tuple[1]), b, y_sorted):
         print tuple[0], tuple[2]
-
-#for w in ("ape", "", "knee", "ape", "ben", "nope", "zebra", "platypus"):
-#    if inBoxFirst(list(w), b):
-#        print w
-
-
-
 
 
 
