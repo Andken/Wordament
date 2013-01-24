@@ -81,7 +81,7 @@ def inBox(xin, yin, w, b):
                             return True
     return False
 
-def inBoxFirst(w, b):
+def inBoxFirst(w, letters, b):
     for x in range(4):
         for y in range(4):
             if b[x][y] == w[0]:
@@ -110,8 +110,8 @@ b = (list(y1), list(y2), list(y3), list(y4))
 wordlist = open("WORD_3_LETTER.LST", "r").readlines()
 
 for pair in wordlist:
-    tuple = pair.rstrip().partition(' ')
-    if inBoxFirst(list(tuple[0]), b):
+    tuple = pair.rstrip().split(' ')
+    if inBoxFirst(list(tuple[0]), list(tuple[1]), b):
         print tuple[0], tuple[2]
 
 #for w in ("ape", "", "knee", "ape", "ben", "nope", "zebra", "platypus"):
