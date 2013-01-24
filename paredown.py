@@ -48,6 +48,9 @@ for w in wordlist:
     if (len(w.rstrip()) >= 3) and (len(w.rstrip()) <= 16):
         result.append((w.rstrip(), getScore(w.rstrip())))
 
-for pair in sorted(result, key=lambda score: score[1]):
+scorelist=sorted(result, key=lambda score: score[1])
+scorelist.reverse()
+
+for pair in scorelist:
     print pair[0], pair[1]
 
