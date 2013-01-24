@@ -107,24 +107,47 @@ def inBoxFirst(w, letters, b, b_sorted):
     return False
 
 
-y = raw_input("?: ")
 
-# TEST BOX
-#baby
-#over
-#open
-#knee
-#y = "babyoveropenknee"
 
-b = (list(y)[0:4], list(y)[4:8], list(y)[8:12], list(y)[12:16])
-y_sorted = ''.join(sorted(y))
+#y = raw_input("?: ")
+#
+## TEST BOX
+##baby
+##over
+##open
+##knee
+##y = "babyoveropenknee"
+#
+#b = (list(y)[0:4], list(y)[4:8], list(y)[8:12], list(y)[12:16])
+#y_sorted = ''.join(sorted(y))
+#
+#wordlist = open("WORD_3_LETTER.LST", "r").readlines()
+#
+#for pair in wordlist:
+#    tuple = pair.rstrip().split(' ')
+#    if inBoxFirst(list(tuple[0]), list(tuple[1]), b, y_sorted):
+#        print tuple[0], tuple[2]
 
-wordlist = open("WORD_3_LETTER.LST", "r").readlines()
 
-for pair in wordlist:
-    tuple = pair.rstrip().split(' ')
-    if inBoxFirst(list(tuple[0]), list(tuple[1]), b, y_sorted):
-        print tuple[0], tuple[2]
+def test(l, b):
+    print l, b, isPossible(list(l), list(b))
+
+
+print "pass"
+test("abc", "abc")
+test("abc", "abcd")
+test("bc", "abc")
+test("bc", "abcd")
+test("abc", "aaaaaaaaabc")
+test("abc", "aaabbbcccc")
+print "fail"
+test("abcd", "abc")
+test("abc", "acd")
+test("bcd", "abc")
+test("bcd", "abce")
+test("abc", "aaaaaaaaaccccccc")
+test("abc", "aaabbb")
+
 
 
 
