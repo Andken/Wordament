@@ -94,8 +94,8 @@ def isPossible(letters, letters_available):
         return isPossible(letters, letters_available[1:])
 
 def inBoxFirst(w, letters, b, b_sorted):
-#    if not isPossible(letters, b_sorted):
-#        return False
+    if not isPossible(letters, b_sorted):
+        return False
 
     for x in range(4):
         for y in range(4):
@@ -109,14 +109,14 @@ def inBoxFirst(w, letters, b, b_sorted):
 
 
 
-y = raw_input("?: ")
+#y = raw_input("?: ")
 
 # TEST BOX
 #baby
 #over
 #open
 #knee
-#y = "babyoveropenknee"
+y = "babyoveropenknee"
 
 b = (list(y)[0:4], list(y)[4:8], list(y)[8:12], list(y)[12:16])
 y_sorted = ''.join(sorted(y))
