@@ -109,14 +109,14 @@ def inBoxFirst(w, letters, b, b_sorted):
 
 
 
-#y = raw_input("?: ")
+y = raw_input("?: ")
 
 # TEST BOX
 #baby
 #over
 #open
 #knee
-y = "babyoveropenknee"
+#y = "babyoveropenknee"
 
 b = (list(y)[0:4], list(y)[4:8], list(y)[8:12], list(y)[12:16])
 y_sorted = ''.join(sorted(y))
