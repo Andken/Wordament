@@ -109,23 +109,25 @@ def inBoxFirst(w, letters, b, b_sorted):
 
 
 
-y = raw_input("?: ")
-
-# TEST BOX
+def solve(letter_box):
+    
+    # TEST BOX
 #baby
 #over
 #open
 #knee
-#y = "babyoveropenknee"
+#letter_box = "babyoveropenknee"
 
-b = (list(y)[0:4], list(y)[4:8], list(y)[8:12], list(y)[12:16])
-y_sorted = ''.join(sorted(y))
+    b = (list(letter_box)[0:4], list(letter_box)[4:8], list(letter_box)[8:12], list(letter_box)[12:16])
+    letter_box_sorted = ''.join(sorted(letter_box))
 
-wordlist = open("WORD_3_LETTER.LST", "r").readlines()
+    wordlist = open("WORD_3_LETTER.LST", "r").readlines()
 
-for pair in wordlist:
-    tuple = pair.rstrip().split(' ')
-    if inBoxFirst(list(tuple[0]), list(tuple[1]), b, y_sorted):
-        print tuple[0], tuple[2]
+    result = []
 
+    for pair in wordlist:
+        tuple = pair.rstrip().split(' ')
+        if inBoxFirst(list(tuple[0]), list(tuple[1]), b, letter_box_sorted):
+            result.append((tuple[0], tuple[2]))
 
+    return result
