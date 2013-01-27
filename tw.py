@@ -4,6 +4,7 @@ import twitter
 from datetime import datetime, timedelta
 from email.utils import parsedate_tz
 import time
+import wordament
 
 # from http://stackoverflow.com/questions/7703865/going-from-twitter-date-to-python-datetime-date
 def to_datetime(datestring):
@@ -27,6 +28,12 @@ while 1:
     if latest_post_time > starting_post_time:
         print "new tweet: ", statuses[0].text
         starting_post_time = latest_post_time
+        if len(statuses[0].text) == 16:
+            results = wordament.solve(statuses[0].text)
+            for r in results:
+                tweet = "%s - %s" % (r[0], r[1])
+                api.PostUpdate(tweet)
+
     time.sleep(1)
 
 

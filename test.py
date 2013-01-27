@@ -11,5 +11,5 @@ test = "babykneefacebook"
 result = wordament.solve(test)
 
 for r in result:
-    print r
-
+    tweet = "%s - %s" % (r[0], r[1])
+    print "   ", tweet
