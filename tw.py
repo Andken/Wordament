@@ -1,8 +1,15 @@
 #!/usr/bin/python
 
 import twitter
+from datetime import datetime, timedelta
+from email.utils import parsedate_tz
+import time
 
-#api=twitter.Api()
+# from http://stackoverflow.com/questions/7703865/going-from-twitter-date-to-python-datetime-date
+def to_datetime(datestring):
+    time_tuple = parsedate_tz(datestring.strip())
+    dt = datetime(*time_tuple[:6])
+    return dt - timedelta(seconds=time_tuple[-1])
 
 api=twitter.Api(consumer_key='XBNaTJYS140ZUgv5jbD77Q',
                 consumer_secret='GAUZj1D4YYdWMRFeNj2IqK0Qvnv44rJJKxlkM7eu5Q',
@@ -10,11 +17,16 @@ api=twitter.Api(consumer_key='XBNaTJYS140ZUgv5jbD77Q',
                 access_token_secret='BwgE205gi1QYzubusk1hZRPAP9LXri8J2E6DVwcg')
 
 
-statuses = api.GetUserTimeline("@nutonwordament")
-for s in statuses:
-    print s
-    
+orig_statuses = api.GetUserTimeline("@nutonwordament")
 
-#status = api.PostUpdate("Does this fucking work?")
-#print status.text
+starting_post_time = to_datetime(orig_statuses[0].created_at)
+
+while 1:
+    statuses = api.GetUserTimeline("@nutonwordament")
+    latest_post_time = to_datetime(statuses[0].created_at)
+    if latest_post_time > starting_post_time:
+        print "new tweet: ", statuses[0].text
+        starting_post_time = latest_post_time
+    time.sleep(1)
+
 
