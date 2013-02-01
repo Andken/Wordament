@@ -2,38 +2,46 @@
 
 import copy
 
-def inBox(xin, yin, w, b):
+def inBox(xin, yin, w, b, path):
     if len(w) == 0:
-        return True
+        return (True, path)
 
     if xin==0 and yin==0:
         for x, y in ((0, 1), (1,1), (1,0)):
             if b[x][y] == w[0]:
                 new_b = copy.deepcopy(b)
                 new_b[x][y] = '?'
-                if inBox(x,y, w[1:], new_b):
-                    return True
+                path.append((x,y))
+                result = inBox(x,y, w[1:], new_b, path)
+                if result[0]:
+                    return (True, path)
     elif xin==3 and yin==0: 
         for x, y in ((2,0), (2,1), (3,1)):
             if b[x][y] == w[0]:
                 new_b = copy.deepcopy(b)
                 new_b[x][y] = '?'
-                if inBox(x,y, w[1:], new_b):
-                    return True
+                path.append((x,y))
+                result = inBox(x,y, w[1:], new_b, path)
+                if result[0]:
+                    return (True, path)
     elif xin==0 and yin==3: 
         for x, y in ((0,2), (1,2), (1,3)):
             if b[x][y] == w[0]:
                 new_b = copy.deepcopy(b)
                 new_b[x][y] = '?'
-                if inBox(x,y, w[1:], new_b):
-                    return True
+                path.append((x,y))
+                result = inBox(x,y, w[1:], new_b, path)
+                if result[0]:
+                    return (True, path)
     elif xin==3 and yin==3: 
         for x, y in ((3,2), (2,2), (2,3)):
             if b[x][y] == w[0]:
                 new_b = copy.deepcopy(b)
                 new_b[x][y] = '?'
-                if inBox(x,y, w[1:], new_b):
-                    return True
+                path.append((x,y))
+                result = inBox(x,y, w[1:], new_b, path)
+                if result[0]:
+                    return (True, path)
     elif xin==0:
         for x in (0,1):
             for y in (yin-1, yin, yin+1):
@@ -41,8 +49,10 @@ def inBox(xin, yin, w, b):
                     if b[x][y] == w[0]:
                         new_b = copy.deepcopy(b)
                         new_b[x][y] = '?'
-                        if inBox(x,y, w[1:], new_b):
-                            return True
+                        path.append((x,y))
+                        result = inBox(x,y, w[1:], new_b, path)
+                        if result[0]:
+                            return (True, path)
     elif xin==3:
         for x in (2,3):
             for y in (yin-1, yin, yin+1):
@@ -50,8 +60,10 @@ def inBox(xin, yin, w, b):
                     if b[x][y] == w[0]:
                         new_b = copy.deepcopy(b)
                         new_b[x][y] = '?'
-                        if inBox(x,y, w[1:], new_b):
-                            return True
+                        path.append((x,y))
+                        result = inBox(x,y, w[1:], new_b, path)
+                        if result[0]:
+                            return (True, path)
     elif yin==0:
         for x in (xin-1, xin, xin+1):
             for y in (0,1):
@@ -59,8 +71,10 @@ def inBox(xin, yin, w, b):
                     if b[x][y] == w[0]:
                         new_b = copy.deepcopy(b)
                         new_b[x][y] = '?'
-                        if inBox(x,y, w[1:], new_b):
-                            return True
+                        path.append((x,y))
+                        result = inBox(x,y, w[1:], new_b, path)
+                        if result[0]:
+                            return (True, path)
     elif yin==3:
         for x in (xin-1, xin, xin+1):
             for y in (2,3):
@@ -68,8 +82,10 @@ def inBox(xin, yin, w, b):
                     if b[x][y] == w[0]:
                         new_b = copy.deepcopy(b)
                         new_b[x][y] = '?'
-                        if inBox(x,y, w[1:], new_b):
-                            return True
+                        path.append((x,y))
+                        result = inBox(x,y, w[1:], new_b, path)
+                        if result[0]:
+                            return (True, path)
     else:
         for x in (xin-1, xin, xin+1):
             for y in (yin-1, yin, yin+1):
@@ -77,9 +93,11 @@ def inBox(xin, yin, w, b):
                     if b[x][y] == w[0]:
                         new_b = copy.deepcopy(b)
                         new_b[x][y] = '?'
-                        if inBox(x,y, w[1:], new_b):
-                            return True
-    return False
+                        path.append((x,y))
+                        result = inBox(x,y, w[1:], new_b, path)
+                        if result[0]:
+                            return (True, path)
+    return (False, [])
 
 def isPossible(letters, letters_available):
     if len(letters) > len(letters_available):
@@ -95,16 +113,18 @@ def isPossible(letters, letters_available):
 
 def inBoxFirst(w, letters, b, b_sorted):
     if not isPossible(letters, b_sorted):
-        return (False, "OOO")
+        return (False, [])
 
     for x in range(4):
         for y in range(4):
             if b[x][y] == w[0]:
                 new_b = copy.deepcopy(b)
                 new_b[x][y] = '?'
-                if inBox(x,y,w[1:], new_b):
-                    return (True, "ZZZ")
-    return (False, "PPP")
+                path = [(x,y)]
+                result = inBox(x,y,w[1:], new_b, path)
+                if result[0]:
+                    return (True, result[1])
+    return (False, [])
 
 
 
