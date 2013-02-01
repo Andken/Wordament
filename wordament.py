@@ -123,11 +123,12 @@ def solve(letter_box):
 
     wordlist = open("WORD_3_LETTER.LST", "r").readlines()
 
-    result = []
+    return_result = []
 
     for pair in wordlist:
         tuple = pair.rstrip().split(' ')
+        
         if inBoxFirst(list(tuple[0]), list(tuple[1]), b, letter_box_sorted):
-            result.append((tuple[0], tuple[2]))
+            return_result.append((tuple[0], tuple[2]))
 
-    return result
+    return return_result
