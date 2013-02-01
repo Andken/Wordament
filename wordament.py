@@ -3,7 +3,6 @@
 import copy
 
 def inBox(xin, yin, w, b, path):
-    print xin, yin, w, path
     if len(w) == 0:
         return (True, path)
 
