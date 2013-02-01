@@ -6,7 +6,7 @@
 
 import wordament
 
-test = "babykneefacekoob"
+test = "111111111111quit"
 
 print test[0:4]
 print test[4:8]

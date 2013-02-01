@@ -3,6 +3,7 @@
 import copy
 
 def inBox(xin, yin, w, b, path):
+    print xin, yin, w, path
     if len(w) == 0:
         return (True, path)
 
@@ -46,10 +47,9 @@ def inBox(xin, yin, w, b, path):
         if b[x][y] == w[0]:
             new_b = copy.deepcopy(b)
             new_b[x][y] = '?'
-            path.append((x,y))
-            result = inBox(x,y, w[1:], new_b, path)
+            result = inBox(x,y, w[1:], new_b, path + [(x,y)])
             if result[0]:
-                return (True, path)
+                return (True, result[1])
 
     return (False, [])
 
