@@ -95,7 +95,7 @@ def isPossible(letters, letters_available):
 
 def inBoxFirst(w, letters, b, b_sorted):
     if not isPossible(letters, b_sorted):
-        return False
+        return (False, "OOO")
 
     for x in range(4):
         for y in range(4):
@@ -103,8 +103,8 @@ def inBoxFirst(w, letters, b, b_sorted):
                 new_b = copy.deepcopy(b)
                 new_b[x][y] = '?'
                 if inBox(x,y,w[1:], new_b):
-                    return True
-    return False
+                    return (True, "ZZZ")
+    return (False, "PPP")
 
 
 
@@ -127,8 +127,9 @@ def solve(letter_box):
 
     for pair in wordlist:
         tuple = pair.rstrip().split(' ')
-        
-        if inBoxFirst(list(tuple[0]), list(tuple[1]), b, letter_box_sorted):
-            return_result.append((tuple[0], tuple[2], "X"))
+
+        result = inBoxFirst(list(tuple[0]), list(tuple[1]), b, letter_box_sorted)
+        if result[0]:
+            return_result.append((tuple[0], tuple[2], result[1]))
 
     return return_result
