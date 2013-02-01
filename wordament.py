@@ -6,97 +6,51 @@ def inBox(xin, yin, w, b, path):
     if len(w) == 0:
         return (True, path)
 
+    coords = []
+
     if xin==0 and yin==0:
-        for x, y in ((0, 1), (1,1), (1,0)):
-            if b[x][y] == w[0]:
-                new_b = copy.deepcopy(b)
-                new_b[x][y] = '?'
-                path.append((x,y))
-                result = inBox(x,y, w[1:], new_b, path)
-                if result[0]:
-                    return (True, path)
-    elif xin==3 and yin==0: 
-        for x, y in ((2,0), (2,1), (3,1)):
-            if b[x][y] == w[0]:
-                new_b = copy.deepcopy(b)
-                new_b[x][y] = '?'
-                path.append((x,y))
-                result = inBox(x,y, w[1:], new_b, path)
-                if result[0]:
-                    return (True, path)
+        coords = [(0,1), (1,1), (1,0)]
+    elif xin==3 and yin==0:
+        coords = [(2,0), (2,1), (3,1)]
     elif xin==0 and yin==3: 
-        for x, y in ((0,2), (1,2), (1,3)):
-            if b[x][y] == w[0]:
-                new_b = copy.deepcopy(b)
-                new_b[x][y] = '?'
-                path.append((x,y))
-                result = inBox(x,y, w[1:], new_b, path)
-                if result[0]:
-                    return (True, path)
+        coords = [(0,2), (1,2), (1,3)]
     elif xin==3 and yin==3: 
-        for x, y in ((3,2), (2,2), (2,3)):
-            if b[x][y] == w[0]:
-                new_b = copy.deepcopy(b)
-                new_b[x][y] = '?'
-                path.append((x,y))
-                result = inBox(x,y, w[1:], new_b, path)
-                if result[0]:
-                    return (True, path)
+        coords = [(3,2), (2,2), (2,3)]
     elif xin==0:
         for x in (0,1):
             for y in (yin-1, yin, yin+1):
                 if not (x==0 and y==yin):
-                    if b[x][y] == w[0]:
-                        new_b = copy.deepcopy(b)
-                        new_b[x][y] = '?'
-                        path.append((x,y))
-                        result = inBox(x,y, w[1:], new_b, path)
-                        if result[0]:
-                            return (True, path)
+                    coords.append((x,y))
     elif xin==3:
         for x in (2,3):
             for y in (yin-1, yin, yin+1):
                 if not (x==3 and y==yin):
-                    if b[x][y] == w[0]:
-                        new_b = copy.deepcopy(b)
-                        new_b[x][y] = '?'
-                        path.append((x,y))
-                        result = inBox(x,y, w[1:], new_b, path)
-                        if result[0]:
-                            return (True, path)
+                    coords.append((x,y))
     elif yin==0:
         for x in (xin-1, xin, xin+1):
             for y in (0,1):
                 if not (x==xin and y==0):
-                    if b[x][y] == w[0]:
-                        new_b = copy.deepcopy(b)
-                        new_b[x][y] = '?'
-                        path.append((x,y))
-                        result = inBox(x,y, w[1:], new_b, path)
-                        if result[0]:
-                            return (True, path)
+                    coords.append((x,y))
     elif yin==3:
         for x in (xin-1, xin, xin+1):
             for y in (2,3):
                 if not (y==3 and x==xin):
-                    if b[x][y] == w[0]:
-                        new_b = copy.deepcopy(b)
-                        new_b[x][y] = '?'
-                        path.append((x,y))
-                        result = inBox(x,y, w[1:], new_b, path)
-                        if result[0]:
-                            return (True, path)
+                    coords.append((x,y))
     else:
         for x in (xin-1, xin, xin+1):
             for y in (yin-1, yin, yin+1):
                 if not (y==yin and x==xin):
-                    if b[x][y] == w[0]:
-                        new_b = copy.deepcopy(b)
-                        new_b[x][y] = '?'
-                        path.append((x,y))
-                        result = inBox(x,y, w[1:], new_b, path)
-                        if result[0]:
-                            return (True, path)
+                    coords.append((x,y))
+
+    for x, y in coords:
+        if b[x][y] == w[0]:
+            new_b = copy.deepcopy(b)
+            new_b[x][y] = '?'
+            path.append((x,y))
+            result = inBox(x,y, w[1:], new_b, path)
+            if result[0]:
+                return (True, path)
+
     return (False, [])
 
 def isPossible(letters, letters_available):
