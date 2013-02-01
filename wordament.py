@@ -129,6 +129,6 @@ def solve(letter_box):
         tuple = pair.rstrip().split(' ')
         
         if inBoxFirst(list(tuple[0]), list(tuple[1]), b, letter_box_sorted):
-            return_result.append((tuple[0], tuple[2]))
+            return_result.append((tuple[0], tuple[2], "X"))
 
     return return_result
