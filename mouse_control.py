@@ -27,14 +27,10 @@ class Mouse(object):
     def screen(self):
         return self.xobject.screen
 
-    @property
-    def root(self):
-        return self.xobject.root
-
     def move(self, x, y, noise):
         x = x + random.randint(-1*noise,noise)
         y = y + random.randint(-1*noise,noise)
-        self.root.warp_pointer(x, y)
+        self.xobject.root.warp_pointer(x, y)
         self.display.sync()
     
     def down(self, button=1):
