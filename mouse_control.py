@@ -23,10 +23,6 @@ class Mouse(object):
     def display(self):
         return self.xobject.display
 
-    @property
-    def screen(self):
-        return self.xobject.screen
-
     def move(self, x, y, noise):
         x = x + random.randint(-1*noise,noise)
         y = y + random.randint(-1*noise,noise)
