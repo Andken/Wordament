@@ -51,19 +51,11 @@ class Mouse(object):
 xobject = XObject()
 m = Mouse(xobject)
 
-m.move_and_click(300,300,1)
+m.move(300,300)
+m.down()
+m.move(500,500)
+m.up()
 
-time.sleep( 5 )
-m.move_and_click(250,250,1)
-print "done"
-
-time.sleep( 5 )
-m.move_and_click(200,200,1)
-print "done"
-
-time.sleep( 5 )
-m.move_and_click(100,100,1)
-print "done"
 
 
 
