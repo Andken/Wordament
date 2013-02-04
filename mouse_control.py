@@ -51,13 +51,13 @@ class Mouse(object):
     def drag_slowly(self, x0, y0, x_fin, y_fin, button=1):
         self.move(x0, y0)
         self.down(button)
-        distance = int(round(math.sqrt((x_fin-x0)*(x_fin-x0) + (y_fin-y0)*(y_fin-y0))))
-        for i in range(distance):
-            x = int(x0 + round((x_fin-x0)/(distance-i)))
-            y = int(y0 + round((y_fin-y0)/(distance-i)))
+        distance = math.sqrt((x_fin-x0)*(x_fin-x0) + (y_fin-y0)*(y_fin-y0))
+        for i in range(int(distance)):
+            distance_ratio = i/distance
+            x = int(x0 + round((x_fin-x0)*distance_ratio))
+            y = int(y0 + round((y_fin-y0)*distance_ratio))
             self.move(x,y)
-            print x, y
-            time.sleep(0.01)
+            time.sleep(0.0005)
         self.move(x_fin,y_fin)
         self.up(button)
 
