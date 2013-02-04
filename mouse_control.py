@@ -19,23 +19,19 @@ class Mouse(object):
     def __init__(self, xobject):
         self.xobject = xobject
 
-    @property
-    def display(self):
-        return self.xobject.display
-
     def move(self, x, y, noise):
         x = x + random.randint(-1*noise,noise)
         y = y + random.randint(-1*noise,noise)
         self.xobject.root.warp_pointer(x, y)
-        self.display.sync()
+        self.xobject.display.sync()
     
     def down(self, button=1):
-        Xlib.ext.xtest.fake_input(self.display, Xlib.X.ButtonPress, button)
-        self.display.sync()
+        Xlib.ext.xtest.fake_input(self.xobject.display, Xlib.X.ButtonPress, button)
+        self.xobject.display.sync()
     
     def up(self, button=1):
-        Xlib.ext.xtest.fake_input(self.display, Xlib.X.ButtonRelease, button)
-        self.display.sync()
+        Xlib.ext.xtest.fake_input(self.xobject.display, Xlib.X.ButtonRelease, button)
+        self.xobject.display.sync()
 
     def drag_slowly(self, start, final, base_time=0.00125, noise=1):
         x0 = start[0]
