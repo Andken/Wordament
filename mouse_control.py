@@ -6,6 +6,7 @@ import sys
 import Xlib.display
 import Xlib.ext.xtest
 from Xlib import X
+import math
 
 class XObject(object):
     def __init__(self):
@@ -47,14 +48,23 @@ class Mouse(object):
         self.down(button)
         self.up(button)
 
+    def drag_slowly(self, x0, y0, x_fin, y_fin, button=1):
+        self.move(x0, y0)
+        self.down(button)
+        distance = int(round(math.sqrt((x_fin-x0)*(x_fin-x0) + (y_fin-y0)*(y_fin-y0))))
+        for i in range(distance):
+            x = int(x0 + round((x_fin-x0)/(distance-i)))
+            y = int(y0 + round((y_fin-y0)/(distance-i)))
+            self.move(x,y)
+            print x, y
+            time.sleep(0.01)
+        self.move(x_fin,y_fin)
+        self.up(button)
 
 xobject = XObject()
 m = Mouse(xobject)
 
-m.move(300,300)
-m.down()
-m.move(500,500)
-m.up()
+m.drag_slowly(300,300,500,500)
 
 
 
