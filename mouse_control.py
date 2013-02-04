@@ -49,31 +49,31 @@ class Mouse(object):
         self.down(button)
         self.up(button)
 
-    def drag_slowly(self, base_time, x0, y0, x_fin, y_fin, button=1):
-        x0 = x0 + random.randint(-20,20)
-        y0 = y0 + random.randint(-20,20)
+    def drag_slowly(self, base_time, noise, x0, y0, x_fin, y_fin, button=1):
+        x0 = x0 + random.randint(-1*noise,noise)
+        y0 = y0 + random.randint(-1*noise,noise)
 
         self.move(x0, y0)
         self.down(button)
         distance = math.sqrt((x_fin-x0)*(x_fin-x0) + (y_fin-y0)*(y_fin-y0))
         for i in range(int(distance)):
             distance_ratio = i/distance
-            x = int(x0 + round((x_fin-x0)*distance_ratio)) + random.randint(-5,5)
-            y = int(y0 + round((y_fin-y0)*distance_ratio)) + random.randint(-5,5)
+            x = int(x0 + round((x_fin-x0)*distance_ratio)) + random.randint(noise/(-5),noise/5)
+            y = int(y0 + round((y_fin-y0)*distance_ratio)) + random.randint(noise/(-5),noise/5)
             self.move(x,y)
 
             # delay before the next move
             time_epsilon = (random.random()*base_time/5)-(base_time * 0.1)
             time.sleep(base_time + time_epsilon)
-        self.move(x_fin + random.randint(-20,20),y_fin + random.randint(-20,20))
+        self.move(x_fin + random.randint(-20,20),y_fin + random.randint(-10,10))
         self.up(button)
 
 xobject = XObject()
 m = Mouse(xobject)
 
-m.drag_slowly(0.0005, 300,300,700,700)
-m.drag_slowly(0.0005, 300,300,700,700)
-m.drag_slowly(0.0005, 300,300,700,700)
+m.drag_slowly(0.00125, 6, 1,700,700,700)
+m.drag_slowly(0.00125, 6, 300,300,700,700)
+m.drag_slowly(0.00125, 6, 300,300,700,700)
 
 
 
