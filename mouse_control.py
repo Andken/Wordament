@@ -43,13 +43,7 @@ class Mouse(object):
         Xlib.ext.xtest.fake_input(self.display, Xlib.X.ButtonRelease, button)
         self.display.sync()
 
-    def move_and_click(self, x, y, button=1):
-        #TODO: jperla: maybe should move back?
-        self.move(x, y)
-        self.down(button)
-        self.up(button)
-
-    def drag_slowly(self, base_time, noise, x0, y0, x_fin, y_fin, button=1):
+    def drag_slowly(self, x0, y0, x_fin, y_fin, button=1, base_time=0.00125, noise=6):
         x0 = x0 + random.randint(-1*noise,noise)
         y0 = y0 + random.randint(-1*noise,noise)
 
@@ -71,9 +65,10 @@ class Mouse(object):
 xobject = XObject()
 m = Mouse(xobject)
 
-m.drag_slowly(0.00125, 6, 1,700,700,700)
-m.drag_slowly(0.00125, 6, 300,300,700,700)
-m.drag_slowly(0.00125, 6, 300,300,700,700)
+m.drag_slowly(1,700,700,700)
+m.drag_slowly(300,300,700,700)
+m.drag_slowly(700,700,300,300)
+m.drag_slowly(700,705,1,705)
 
 
 
