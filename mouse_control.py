@@ -7,6 +7,7 @@ import Xlib.display
 import Xlib.ext.xtest
 from Xlib import X
 import math
+import random
 
 class XObject(object):
     def __init__(self):
@@ -48,41 +49,32 @@ class Mouse(object):
         self.down(button)
         self.up(button)
 
-    def drag_slowly(self, x0, y0, x_fin, y_fin, button=1):
+    def drag_slowly(self, base_time, x0, y0, x_fin, y_fin, button=1):
+        x0 = x0 + random.randint(-20,20)
+        y0 = y0 + random.randint(-20,20)
+
         self.move(x0, y0)
         self.down(button)
         distance = math.sqrt((x_fin-x0)*(x_fin-x0) + (y_fin-y0)*(y_fin-y0))
         for i in range(int(distance)):
             distance_ratio = i/distance
-            x = int(x0 + round((x_fin-x0)*distance_ratio))
-            y = int(y0 + round((y_fin-y0)*distance_ratio))
+            x = int(x0 + round((x_fin-x0)*distance_ratio)) + random.randint(-5,5)
+            y = int(y0 + round((y_fin-y0)*distance_ratio)) + random.randint(-5,5)
             self.move(x,y)
-            time.sleep(0.0005)
-        self.move(x_fin,y_fin)
+
+            # delay before the next move
+            time_epsilon = (random.random()*base_time/5)-(base_time * 0.1)
+            time.sleep(base_time + time_epsilon)
+        self.move(x_fin + random.randint(-20,20),y_fin + random.randint(-20,20))
         self.up(button)
 
 xobject = XObject()
 m = Mouse(xobject)
 
-m.drag_slowly(300,300,500,500)
+m.drag_slowly(0.0005, 300,300,700,700)
+m.drag_slowly(0.0005, 300,300,700,700)
+m.drag_slowly(0.0005, 300,300,700,700)
 
 
 
 
-###while 1:
-###    # Wait for display to send something, or a timeout of one second
-###    readable, w, e = select.select([d], [], [], 1)
-###
-###    # if no files are ready to be read, it's an timeout
-###    if not readable:
-###        handle_timeout()
-###
-###    # if display is readable, handle as many events as have been recieved
-###    elif disp in readable:
-###        i = disp.pending_events()
-###        while i > 0:
-###            event = disp.next_event()
-###            handle_event(event)
-###            i = i - 1
-###
-###    # loop around to wait for more things to happen
