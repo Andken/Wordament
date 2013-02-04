@@ -44,8 +44,6 @@ class Mouse(object):
         x_fin = final[0]
         y_fin = final[1]
 
-        print "ds", self.current_pos, final
-
         self.move(self.current_pos, noise)
         distance = math.sqrt((x_fin-x0)*(x_fin-x0) + (y_fin-y0)*(y_fin-y0))
         for i in range(int(distance)):
@@ -53,7 +51,6 @@ class Mouse(object):
             x = int(x0 + round((x_fin-x0)*distance_ratio))
             y = int(y0 + round((y_fin-y0)*distance_ratio))
             self.move((x,y), noise)
-            print "\t\t", x,y
 
         self.move((x_fin, y_fin), noise)
 
@@ -97,21 +94,8 @@ m.do_pattern([(0,0),
               ])
 
 
-#m.move(1,700,1)
-#m.down()
-#m.drag_slowly((700,700))
-#time.sleep(0.05)
-#m.drag_slowly((700,1000))
-#m.up()
-#
-#m.move(700,700,1)
-#m.down()
-#m.drag_slowly((300,300))
-#m.up()
-#
-#m.drag_slowly((1,705))
-#m.up()
-
-
-
+m.do_pattern([(0,0),
+              (0,1),
+              (1,1),
+              (1,0)])
 
