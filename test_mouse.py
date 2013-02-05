@@ -2,8 +2,7 @@
 
 import mouse_control
 
-xobject = mouse_control.XObject()
-m = mouse_control.Mouse(xobject, 75, (700,700))
+m = mouse_control.Mouse(75, (700,700))
 
 m.do_pattern([(0,0),
               (0,1),

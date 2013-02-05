@@ -16,8 +16,8 @@ class XObject(object):
         self.root = self.screen.root
 
 class Mouse(object):
-    def __init__(self, xobject, size_of_box, origin):
-        self.xobject = xobject
+    def __init__(self, size_of_box, origin):
+        self.xobject = XObject()
         self.size_of_box = size_of_box
         self.origin = origin
         self.current_pos = (0,0)
