@@ -14,7 +14,7 @@ print test[12:16]
 
 result = wordament.solve(test)
 
-x = 2
+x = 200
 for r in result:
     m = mouse_control.Mouse(75, (700,700))
     m.do_pattern(r[2])

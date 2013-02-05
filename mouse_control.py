@@ -54,17 +54,17 @@ class Mouse(object):
 
         self.move((x_fin, y_fin), noise)
 
-    def translate(self, coord):
-        x = self.origin[0] + coord[0]*self.size_of_box + self.size_of_box/2
-        y = self.origin[1] + coord[1]*self.size_of_box + self.size_of_box/2
+    def translate(self, coord, noise=0):
+        x = self.origin[0] + coord[0]*self.size_of_box + self.size_of_box/2 + random.randint(noise/-2, noise/2)
+        y = self.origin[1] + coord[1]*self.size_of_box + self.size_of_box/2 + random.randint(noise/-2, noise/2)
         return (x,y)
 
     def do_pattern(self, coords):
         self.up()
-        self.move(self.translate(coords[0]))
+        self.move(self.translate(coords[0], 20))
         self.down()
         for c in coords[1:]:
-            self.drag_slowly(self.translate(c))
+            self.drag_slowly(self.translate(c, 20))
             time.sleep(0.15)
 
         self.up()
