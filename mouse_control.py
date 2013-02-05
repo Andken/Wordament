@@ -37,7 +37,7 @@ class Mouse(object):
         Xlib.ext.xtest.fake_input(self.xobject.display, Xlib.X.ButtonRelease, button)
         self.xobject.display.sync()
 
-    def drag_slowly(self, final, base_time=0.00125, noise=1):
+    def drag_slowly(self, final, base_time=0.00225, noise=1):
         x0 = self.current_pos[0]
         y0 = self.current_pos[1]
 
@@ -62,13 +62,10 @@ class Mouse(object):
     def do_pattern(self, coords):
         self.up()
         self.move(self.translate(coords[0]))
-        print self.translate(coords[0])
         self.down()
         for c in coords[1:]:
             self.drag_slowly(self.translate(c))
-            time.sleep(0.5)
-
-            print self.translate(c)
+            time.sleep(0.15)
 
         self.up()
 
