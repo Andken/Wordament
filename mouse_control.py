@@ -61,10 +61,10 @@ class Mouse(object):
 
     def do_pattern(self, coords):
         self.up()
-        self.move(self.translate(coords[0], 20))
+        self.move(self.translate(coords[0], 10))
         self.down()
         for c in coords[1:]:
-            self.drag_slowly(self.translate(c, 20))
+            self.drag_slowly(self.translate(c, 10))
             time.sleep(0.15)
 
         self.up()
