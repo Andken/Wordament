@@ -16,7 +16,7 @@ result = wordament.solve(test)
 
 x = 200
 for r in result:
-    m = mouse_control.Mouse(75, (700,700))
+    m = mouse_control.Mouse(75, (200,200))
     m.do_pattern(r[2])
     print r[0]
     print "::"
