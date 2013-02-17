@@ -1,3 +1,5 @@
+// From: http://www.rjmcnamara.com/wp-content/uploads/2010/12/DeltaRobot/DeltaRobot.C
+
  // robot geometry
  // (look at pics above for explanation)
  const float e = 115.0;     // end effector
