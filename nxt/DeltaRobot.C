@@ -1,11 +1,11 @@
 // From: http://www.rjmcnamara.com/wp-content/uploads/2010/12/DeltaRobot/DeltaRobot.C
 
  // robot geometry
- // (look at pics above for explanation)
- const float e = 115.0;     // end effector
- const float f = 457.3;     // base
- const float re = 232.0;
- const float rf = 112.0;
+ // The units are Lego units
+ const float e = 12.0;      // end effector
+ const float f = 46.0;     // base
+ const float re = 22.0;
+ const float rf = 8.0;
  
  // trigonometric constants
  const float sqrt3 = sqrt(3.0);
