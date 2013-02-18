@@ -1,6 +1,9 @@
 #!/usr/bin/python
 
-import sin, cos, sqrt, atan from math
+from math import sin
+from math import cos
+from math import sqrt
+from math import atan
 import settings as s
 import sys
 
