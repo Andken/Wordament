@@ -1,6 +1,9 @@
 #!/usr/bin/python
 
-import settings as s
-import math
+import DeltaRobot
 
-print s.SQRT3, math.sqrt(3.0)
+
+print "test start"
+
+
+
