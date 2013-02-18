@@ -79,12 +79,11 @@ def delta_calcAngleYZ(x0, y0, z0):
     return theta
 
  
- # inverse kinematics: (x0, y0, z0) -> (theta1, theta2, theta3)
- # returned status: 0=OK, -1=non-existing position
- int delta_calcInverse(float x0, float y0, float z0, float &theta1, float &theta2, float &theta3) {
-     theta1 = theta2 = theta3 = 0
-     int status = delta_calcAngleYZ(x0, y0, z0, theta1)
-     if (status == 0) status = delta_calcAngleYZ(x0*cos120 + y0*sin120, y0*cos120-x0*sin120, z0, theta2)  # rotate coords to +120 deg
-     if (status == 0) status = delta_calcAngleYZ(x0*cos120 - y0*sin120, y0*cos120+x0*sin120, z0, theta3)  # rotate coords to -120 deg
-     return status
- }
+# inverse kinematics: (x0, y0, z0) -> (theta1, theta2, theta3)
+# returned status: 0=OK, -1=non-existing position
+def delta_calcInverse(x0, y0, z0):
+    theta1 = delta_calcAngleYZ(x0, y0, z0)
+    theta2 = delta_calcAngleYZ(x0*s.COS120 + y0*s.SIN120, y0*S.COS120-x0*s.SIN120, z0)  # rotate coords to +120 deg
+    theta3 = delta_calcAngleYZ(x0*s.COS120 - y0*s.SIN120, y0*s.COS120+x0*s.SIN120, z0)  # rotate coords to -120 deg 
+     
+    return theta1, theta2, theta3
