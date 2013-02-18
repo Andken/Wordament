@@ -4,6 +4,10 @@ from DeltaRobot import *
 
 print "test start"
 
-print delta_calcForward(0,0,0)
-print delta_calcInverse(2*s.PI,2*s.PI,2*s.PI)
+x, y, z = delta_calcForward(0.0,0.0,0.0)
+t1, t2, t3 = delta_calcInverse(x, y, z)
+x2, y2, z2 = delta_calcForward(t1, t2, t3)
+print x, y, z
+print t1, t2, t3
+print x2, y2, z2
 
