@@ -1,21 +1,5 @@
 # From: http:#www.rjmcnamara.com/wp-content/uploads/2010/12/DeltaRobot/DeltaRobot.C
 
- # robot geometry
- # The units are Lego units
- const float e = 12.0;      # end effector
- const float f = 46.0;     # base
- const float re = 22.0;
- const float rf = 8.0;
- 
- # trigonometric constants
- const float sqrt3 = sqrt(3.0);
- const float pi = 3.141592653;    # PI
- const float sin120 = sqrt3/2.0;   
- const float cos120 = -0.5;        
- const float tan60 = sqrt3;
- const float sin30 = 0.5;
- const float tan30 = 1/sqrt3;
- 
  # forward kinematics: (theta1, theta2, theta3) -> (x0, y0, z0)
  # returned status: 0=OK, -1=non-existing position
  int delta_calcForward(float theta1, float theta2, float theta3, float &x0, float &y0, float &z0) {
