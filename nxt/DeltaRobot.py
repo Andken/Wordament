@@ -74,11 +74,11 @@ def delta_calcAngleYZ(x0, y0, z0):
     d = -(a+b*y1)*(a+b*y1)+s.RF*(b*b*s.RF+s.RF) 
     if d < 0: 
         # non-existing point
-        sys.exit(-1)
+        sys.exit(2)
 
     yj = (y1 - a*b - sqrt(d))/(b*b + 1) # choosing outer point
     zj = a + b*yj
-    theta = 180.0*atan(-zj/(y1 - yj))/pi + (180.0 if yj>y1 else 0.0)
+    theta = 180.0*atan(-zj/(y1 - yj))/s.PI + (180.0 if yj>y1 else 0.0)
     return theta
 
  
@@ -86,7 +86,7 @@ def delta_calcAngleYZ(x0, y0, z0):
 # returned status: 0=OK, -1=non-existing position
 def delta_calcInverse(x0, y0, z0):
     theta1 = delta_calcAngleYZ(x0, y0, z0)
-    theta2 = delta_calcAngleYZ(x0*s.COS120 + y0*s.SIN120, y0*S.COS120-x0*s.SIN120, z0)  # rotate coords to +120 deg
+    theta2 = delta_calcAngleYZ(x0*s.COS120 + y0*s.SIN120, y0*s.COS120-x0*s.SIN120, z0)  # rotate coords to +120 deg
     theta3 = delta_calcAngleYZ(x0*s.COS120 - y0*s.SIN120, y0*s.COS120+x0*s.SIN120, z0)  # rotate coords to -120 deg 
      
     return theta1, theta2, theta3
