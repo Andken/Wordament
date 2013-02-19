@@ -6,13 +6,14 @@ from math import cos
 from math import tan
 from math import atan
 from math import sqrt
+import sys
 
 # adapted from: http://www.rjmcnamara.com/wp-content/uploads/2010/12/DeltaRobot/DeltaRobot.C
 
 # robot geometry
 # The units are Lego units
 e = 12.0     # end effector
-f = 46.0     # base
+f = 23.0     # base
 re = 22.0
 rf = 8.0
  
