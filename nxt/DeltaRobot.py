@@ -7,14 +7,14 @@ import atan from math
 import sqrt from math
 import pi from math
 
-// adapted from: http://www.rjmcnamara.com/wp-content/uploads/2010/12/DeltaRobot/DeltaRobot.C
+# adapted from: http://www.rjmcnamara.com/wp-content/uploads/2010/12/DeltaRobot/DeltaRobot.C
 
- // robot geometry
- // The units are Lego units
- const float e = 12.0;      // end effector
- const float f = 46.0;     // base
- const float re = 22.0;
- const float rf = 8.0;
+# robot geometry
+# The units are Lego units
+e = 12.0;     # end effector
+f = 46.0;     # base
+re = 22.0;
+rf = 8.0;
  
  // trigonometric constants
  const float sqrt3 = sqrt(3.0);
