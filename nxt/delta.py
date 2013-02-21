@@ -1,27 +1,28 @@
-# vim: set fileencoding=utf-8 expandtab shiftwidth=4 tabstop=4 softtabstop=4:
+#!/usr/bin/python
+
+from math import pi
+from math import sqrt
+from math import atan
+from math import sin
+from math import cos
+import sys
+
 #
 #
 # NXT delta robot
 #
-# http://blog.jfedor.org/2012/08/nxt-delta-robot.html
+# http:#blog.jfedor.org/2012/08/nxt-delta-robot.html
 #
 # This code requires the NBC/NXC enhanced firmware.
 #
 # The kinematics math is taken from here:
-# http://forums.trossenrobotics.com/tutorials/introduction-129/delta-robot-kinematics-3276/
+# http:#forums.trossenrobotics.com/tutorials/introduction-129/delta-robot-kinematics-3276/
 #
-
-from math import sqrt
-from math import pi
-from math import sin
-from math import cos
-from math import atan
-import sys
-
+#
 # robot geometry
 e = 12.0     # end effector
 f = 46.0     # base
-re = 21.0
+re = 22.0
 rf = 8.0
 
 # trigonometric constants
@@ -33,6 +34,7 @@ sin30 = 0.5
 tan30 = 1.0/sqrt3
 
 # forward kinematics: (theta1, theta2, theta3) -> (x0, y0, z0)
+# returned status: 0=OK, -1=non-existing position
 def delta_calcForward(theta1, theta2, theta3):
     t = (f-e)*tan30/2
     dtr = pi/180.0
@@ -74,14 +76,12 @@ def delta_calcForward(theta1, theta2, theta3):
     # discriminant
     d = b*b - 4.0*a*c
     if (d < 0):
-        # non-existing point
-        sys.exit(1)
+        return -1,0,0,0 # non-existing point
 
     z0 = -0.5*(b+sqrt(d))/a
     x0 = (a1*z0 + b1)/dnm
     y0 = (a2*z0 + b2)/dnm
-    return x0, y0, z0
-
+    return 0,x0,y0,z0
 
 def delta_calcAngleYZ(x0, y0, z0):
     y1 = -0.5 * 0.57735 * f # f/2 * tg 30
@@ -93,35 +93,32 @@ def delta_calcAngleYZ(x0, y0, z0):
     # discriminant
     d = -(a+b*y1)*(a+b*y1)+rf*(b*b*rf+rf) 
     if (d < 0):
-         # non-existing point
-        sys.exit(2)
-
+        return -1,0 # non-existing point
     yj = (y1 - a*b - sqrt(d))/(b*b + 1) # choosing outer point
     zj = a + b*yj
     theta = 180.0*atan(-zj/(y1 - yj))/pi + (180.0 if (yj>y1) else 0.0)
     if ((theta < 0) or (theta > 180)):
-        sys.exit(3)
-
-    return theta
+        return -1,0
+    return 0,theta
 
 # inverse kinematics: (x0, y0, z0) -> (theta1, theta2, theta3)
 # returned status: 0=OK, -1=non-existing position
 def delta_calcInverse(x0, y0, z0):
-    theta1 = delta_calcAngleYZ(x0, y0, z0)
-
-    # rotate coords to +120 deg
-    theta2 = delta_calcAngleYZ(x0*cos120 + y0*sin120, y0*cos120-x0*sin120, z0)
-
-    # rotate coords to -120 deg
-    theta3 = delta_calcAngleYZ(x0*cos120 - y0*sin120, y0*cos120+x0*sin120, z0)
-
-    return theta1, theta2, theta3
+    theta1 = 0
+    theta2 = 0
+    theta3 = 0
+    status, theta1 = delta_calcAngleYZ(x0, y0, z0)
+    if (status == 0):
+        status, theta2 = delta_calcAngleYZ(x0*cos120 + y0*sin120, y0*cos120-x0*sin120, z0)  # rotate coords to +120 deg
+    if (status == 0):
+        status, theta3 = delta_calcAngleYZ(x0*cos120 - y0*sin120, y0*cos120+x0*sin120, z0)  # rotate coords to -120 deg
+    return status, theta1, theta2, theta3
 
 
 #task main() {
-#    float t1
-#    float t2
-#    float t3
+#    t1
+#    t2
+#    t3
 #
 #    int errors = 0
 #
