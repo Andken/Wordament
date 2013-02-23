@@ -1,7 +1,11 @@
 #!/usr/bin/python
 
+import matplotlib
+import pylab
 import random
 from delta import *
+from math import ceil
+from math import floor
 
 def test(x, y, z):
 #    print "################"
@@ -53,3 +57,11 @@ print "x: (%f - %f)" % (min_x, max_x)
 print "y: (%f - %f)" % (min_y, max_y)
 print "z: (%f - %f)" % (min_z, max_z)
 
+for z in range(int(floor(min_z)), int(ceil(max_z))):
+    x_points = []
+    y_points = []
+    for point in possible_vals:
+        if(round(point[2]) == z):
+            x_points.append(point[0])
+            y_points.append(point[1])
+    
