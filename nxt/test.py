@@ -30,7 +30,7 @@ min_z = 500
 
 possible_vals = []
 
-for x in range(10000):
+for x in range(100000):
     x = random.uniform(-17.5,17.5)
     y = random.uniform(-17.5,17.5)
     z = int(random.uniform(-35,-1))
@@ -51,12 +51,13 @@ for x in range(10000):
         possible_vals.append((x,y,z))
     
 
-print possible_vals
-print len(possible_vals)
+#print possible_vals
+#print len(possible_vals)
 print "x: (%f - %f)" % (min_x, max_x)
 print "y: (%f - %f)" % (min_y, max_y)
 print "z: (%f - %f)" % (min_z, max_z)
 
+#for z in range(-24,-22):
 for z in range(int(floor(min_z)), int(ceil(max_z))):
     x_points = []
     y_points = []
@@ -64,4 +65,11 @@ for z in range(int(floor(min_z)), int(ceil(max_z))):
         if(round(point[2]) == z):
             x_points.append(point[0])
             y_points.append(point[1])
-    
+
+    matplotlib.pyplot.figure()
+    matplotlib.pyplot.scatter(x_points,y_points)
+    matplotlib.pyplot.title("z = %f" % z)
+    matplotlib.pyplot.xlim(floor(min_x),ceil(max_x))
+    matplotlib.pyplot.ylim(floor(min_y),ceil(max_y))
+
+matplotlib.pyplot.show()
